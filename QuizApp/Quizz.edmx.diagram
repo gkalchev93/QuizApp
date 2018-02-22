@@ -7,7 +7,7 @@
       <Diagram DiagramId="d79a6bd187454f4fb9b34988627bf304" Name="Diagram1">
         <EntityTypeShape EntityType="QuizzDbModel.Choice" Width="1.5" PointX="5.875" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QuizzDbModel.Question" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuizzDbModel.User" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuizzDbModel.User" Width="1.5" PointX="8" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="QuizzDbModel.FK_Choices_Questions" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
