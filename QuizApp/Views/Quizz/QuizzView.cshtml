@@ -1,0 +1,86 @@
+﻿@model QuizApp.ViewModels.QuestionVM
+@{
+    ViewBag.Title = "Question";
+    int countR = 0;
+    int mode = (int)Session["SelectedMode"];
+}
+<div class="container">
+    <div class="Quiz">
+
+        @if (Model != null)
+        {
+            <div class="QuestionBlock" style="border: 1px solid #bdbdbd; width: 75%; border-radius: 4px; margin-top: 20px; background-color: #f0ffff; padding: 2px;">
+                <div class="Question" style="padding: 1%;">
+                    <h4 style="margin-top: 0.5%;margin-bottom:0.5%;"> <span class="label label-info">Question:</span> </h4>
+                    <div style="display:inline;padding:2%;">@Model.QuestionText</div>
+                </div>
+                <div class="Choices" style="margin-left: 4%;">
+                    @if (mode == 1)
+                    {
+                        foreach (var choice in Model.Choices)
+                        {
+                            <label class="radio-inline">
+                                <input type="radio" name="inlineRadioOptions" id="@string.Format("{0}{1}", "inlineRadio", countR)" value="@choice.ChoiceText" style="margin-left: -16px;"> @choice.ChoiceText
+                            </label><br />
+                            countR++;
+                        }
+                    }
+                    else if (mode == 2)
+                    {
+                        <p>Your answer:</p>
+                        <input type="text" name="answer" id="answer" value="" style="margin-left: -4px;">
+                    }
+                    else if (mode == 0)
+                    {
+                        <div style="display:inline;padding:2%;text-align:center">@Model.Anwser</div>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inline1" value="1" style="margin-left: -16px;"> Yes<br>
+                            <input type="radio" name="inlineRadioOptions" id="inline2" value="0" style="margin-left: -16px;"> No
+                        </label><br />
+                    }
+                </div>
+                <button type="button" onclick="CheckAnswer();" id="Enter" class="btn btn-success btn-sm" style="width:20%;margin-top:10px;margin-left:30px"><span class="glyphicon glyphicon-ok"></span>   Check answer </button>
+
+
+                <script type="text/javascript">
+                        var quizzMode = @mode;
+                        var answer = "@Model.Anwser.ToLowerInvariant()";
+
+                        function CheckAnswer() {
+                            if (quizzMode == 0) {
+                                var userChoose = document.querySelector('input[name="inlineRadioOptions"]:checked').value.toLowerCase();
+                                if (1 == userChoose) {
+                                    alert("Good! Correct Answer is " + answer);
+                                }
+                                else {
+                                    alert("Sorry! Wrong Answer! The correct one was " + answer);
+                                }
+                            }
+                            else if (quizzMode == 1) {
+                                var userChoose = document.querySelector('input[name="inlineRadioOptions"]:checked').value.toLowerCase();
+                                if (answer == userChoose) {
+                                    alert("Good! Correct Answer is " + answer);
+                                }
+                                else {
+                                    alert("Sorry! Wrong Answer! The correct one was " + answer);
+                                }
+                            }
+                            else if (quizzMode  == 2) {
+                                var userChoose = document.querySelector('input[name="answer"]').value.toLowerCase();
+                                if (answer == userChoose) {
+                                    alert("Good! Correct Answer is " + answer);
+                                }
+                                else {
+                                    alert("Sorry! Wrong Answer! The correct one was " + answer);
+                                }
+                            }
+                            window.history.back();
+                        }
+                </script>
+            </div>
+        }
+    </div>
+</div>
+
+
+
